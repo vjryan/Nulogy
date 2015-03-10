@@ -10,6 +10,7 @@ var NuPackCalculator = function(_base){
 		drugs: 7.5,
 		electronics: 2
 	}
+	this.symbol = "$"; // default currency symbol
 
 };
 
@@ -38,8 +39,7 @@ NuPackCalculator.prototype.setGoodsMarkup = function(_goods){
 
 // Displays the value passed as a 2 decimal.
 NuPackCalculator.prototype.formatTotal = function(_total){
-	var symbol = '$';
-	return symbol+_total.toFixed(2).toString();
+	return this.symbol+_total.toFixed(2).toString();
 };
 
 // Calculates the base markup then adds all additional markups to base.
@@ -49,6 +49,8 @@ NuPackCalculator.prototype.Calculate = function(){
 	var worker_markup =  this.getWorkerMarkup();
 	var goods_markup = this.goods_markup_pct;
 
-	var total = base_price + (base_price * (worker_markup + goods_markup) / 100);
+	var total_markup = worker_markup + goods_markup;
+
+	var total = base_price + ( (base_price * total_markup) / 100);
 	return this.formatTotal(total);
 };
