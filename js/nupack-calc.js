@@ -31,7 +31,7 @@ NuPackCalculator.prototype.getWorkerMarkup = function(){
 
 //Sets the markup % of additonal material goods if found.
 NuPackCalculator.prototype.setGoodsMarkup = function(_goods){
-	if(typeof(this.defined_goods[_goods])){
-		this.goods_markup_pct = this.defined_goods[_goods];
+	if(typeof(this.goods_markup_list[_goods]) !== "undefined"){
+		this.goods_markup_pct = this.goods_markup_list[_goods];
 	}
 };
