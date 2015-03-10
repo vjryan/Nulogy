@@ -12,3 +12,19 @@ var NuPackCalculator = function(_base){
 	}
 
 };
+
+// Calculates & returns base price w/ % markup.
+NuPackCalculator.prototype.getBasePrice = function(){
+	return this.base + ( (this.base * this.base_markup_pct) / 100 );
+};
+
+
+// Sets number of workers needed for the job: default => 1 
+NuPackCalculator.prototype.setWorkers = function(_workers){
+	this.workers = _workers;
+};
+
+// returns the markup on workers.
+NuPackCalculator.prototype.getWorkerMarkup = function(){
+	return this.workers * this.workers_markup_pct;
+};
