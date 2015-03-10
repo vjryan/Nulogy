@@ -9,7 +9,8 @@
 		function Nupack(_base, _workers, _goods){
 			var Order = new NuPackCalculator(_base);
 			Order.setWorkers(_workers);
-			console.log(Order.getWorkerMarkup());
+			Order.setGoodsMarkup(_goods)
+			console.log(Order);
 		}
 
 		var t = Nupack(1299.99, 3, "food");
