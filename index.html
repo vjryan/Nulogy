@@ -1,21 +1,73 @@
 <!DOCTYPE html>
 	<head>
+	<link rel="shortcut icon" type="image/png" href="jasmine/lib/jasmine-core/jasmine_favicon.png">
+	<link rel="stylesheet" type="text/css" href="jasmine/lib/jasmine-core/jasmine.css">
+
+	<script type="text/javascript" src="jasmine/lib/jasmine-core/jasmine.js"></script>
+	<script type="text/javascript" src="jasmine/lib/jasmine-core/jasmine-html.js"></script>
+	<script type="text/javascript" src="jasmine/lib/jasmine-core/boot.js"></script>
 		<script type="text/javascript" src="js/nupack-calc.js"></script>
 
 
 
 		<script>
+		// http://www.cheatography.com/citguy/cheat-sheets/jasmine-js-testing/
 
 		function Nupack(_base, _workers, _goods){
 			var Order = new NuPackCalculator(_base);
 			Order.setWorkers(_workers);
 			Order.setGoodsMarkup(_goods)
-			console.log(Order.Calculate());
+			var result = Order.Calculate();
+			console.log(result);
+			return result;
 		}
 
-		var t = Nupack(1299.99, 3, "food");
-		var t = Nupack(5432.00, 1, "drugs");
-		var t = Nupack(12456.95, 4, "books");
+
+		//var t = Nupack(1299.99, 3, "food");
+		//var t = Nupack(5432.00, 1, "drugs");
+		//var t = Nupack(12456.95, 4, "books");
+
+		// JASMINE CASES
+		describe("getBasePrice() : Basic Test Cases", function() {
+			it("Test 1: Evaluates  base markup pricing", function() {
+
+				var Order = new NuPackCalculator(1299.99);
+
+				expect(Order.getBasePrice().toFixed(2)).toBe('1364.99');
+
+			});
+		});
+
+
+		describe("Calculate() : Basic Test Cases For Total Packaging", function() {
+			var result = null
+			 beforeEach(function() {
+			    result = null;
+			  });
+
+		    	  
+			it("Option 1: Evaulates Total Packaging For => 1299.99, 3 Workers, Food", function() {
+				var result = Nupack(1299.99, 3, "food");	
+			    expect(result).toBe('$1591.58');
+			});
+
+				  
+			it("Option 2: Evaulates Total Packaging For => 5432.00, 1 Worker, Drugs", function() {
+				var result = Nupack(5432.00, 1, "drugs");	
+			    expect(result).toBe('$6199.81');
+			});
+			  
+			it("Option 3: Evaulates Total Packaging For => 12456.95, 4 Workers, Books", function() {
+				var result = Nupack(12456.95, 4, "books");		
+			    expect(result).toBe('$13707.63');
+			});
+
+			it("Option 4: Evaulates Total Packaging For => 1000.00, No Workers, Electronics", function() {
+				var result = Nupack(1000.00, 0, "electronics");		
+			    expect(result).toBe('$1071.00');
+
+			});
+		});
 		</script>
 	</head>
 
