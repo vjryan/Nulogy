@@ -36,6 +36,12 @@ NuPackCalculator.prototype.setGoodsMarkup = function(_goods){
 	}
 };
 
+// Displays the value passed as a 2 decimal.
+NuPackCalculator.prototype.formatTotal = function(_total){
+	var symbol = '$';
+	return symbol+_total.toFixed(2).toString();
+};
+
 // Calculates the base markup then adds all additional markups to base.
 NuPackCalculator.prototype.Calculate = function(){
 	// Grab the base price.
@@ -44,5 +50,5 @@ NuPackCalculator.prototype.Calculate = function(){
 	var goods_markup = this.goods_markup_pct;
 
 	var total = base_price + (base_price * (worker_markup + goods_markup) / 100);
-	return total;
+	return this.formatTotal(total);
 };
